@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.megafilmes_teste.R;
 import com.example.megafilmes_teste.model.Serie;
 
@@ -15,6 +17,7 @@ import java.util.List;
 
 public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder> {
     private List<Serie> series;
+    private String GET_POSTERS = "http://image.tmdb.org/t/p/w500";
     
     public SeriesAdapter(List<Serie> series) {this.series = series;}
 
@@ -28,6 +31,7 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesView
 
     @Override
     public void onBindViewHolder(@NonNull SeriesViewHolder holder, int position) {
+        holder.bind(series.get(position));
 
     }
 
@@ -37,13 +41,19 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesView
     }
 
     public class SeriesViewHolder extends RecyclerView.ViewHolder{
-        public  View viewSerie;
+        ImageView viewSerie;
 
         public SeriesViewHolder(View itemView) {
             super(itemView);
-            this.viewSerie = itemView;
+            viewSerie = itemView.findViewById(R.id.image_serie);
         }
 
 
+        public void bind(Serie serie) {
+            Glide.with(itemView)
+                    .load(GET_POSTERS + serie.getPosterPath())
+                    .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
+                    .into(viewSerie);
+        }
     }
 }

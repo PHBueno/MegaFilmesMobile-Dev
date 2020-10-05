@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.megafilmes_teste.Interfaces.OnGetMoviesCallback;
+import com.example.megafilmes_teste.Interfaces.OnGetSeriesCallback;
 import com.example.megafilmes_teste.MovieService.Service;
+import com.example.megafilmes_teste.MovieService.ServiceSerie;
 import com.example.megafilmes_teste.RecyclerViewAdapter.MoviesAdapter;
 import com.example.megafilmes_teste.RecyclerViewAdapter.SeriesAdapter;
 import com.example.megafilmes_teste.model.Filme;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity{
     private MoviesAdapter adapter;
 
     private SeriesAdapter adapterSerie;
+    private ServiceSerie serieRepository;
 
     private Service movieRepository;
 
@@ -55,11 +58,29 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        RecyclerView rv = findViewById(R.id.recyclerview_series);
-        rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        List<Serie> series = new ArrayList<>();
-        adapterSerie = new SeriesAdapter(series);
-        rv.setAdapter(adapterSerie);
+        //SETA ADAPTER PARA RECYCLERVIEW DE SERIES.
+
+        serieRepository = ServiceSerie.getInstance();
+
+        final RecyclerView seriesList = findViewById(R.id.recyclerview_series);
+        seriesList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        serieRepository.getSeries(new OnGetSeriesCallback() {
+            @Override
+            public void onSuccess(List<Serie> series) {
+                adapterSerie = new SeriesAdapter(series);
+                seriesList.setAdapter(adapterSerie);
+            }
+
+            @Override
+            public void onError() {
+                Toast.makeText(MainActivity.this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        //List<Serie> series = new ArrayList<>();
+        //adapterSerie = new SeriesAdapter(series);
+        //rv.setAdapter(adapterSerie);
 
     }
 
