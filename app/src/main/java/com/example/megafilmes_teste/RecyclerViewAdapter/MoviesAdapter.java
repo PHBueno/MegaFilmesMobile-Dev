@@ -4,7 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
+//import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,6 +53,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.FilmesView
 
         public void bind(Filme filme) {
            //txtTitle.setText(filme.getTitle());
+            // Insere imagem do poster
             Glide.with(itemView)
                     .load(GET_POSTERS + filme.getPosterPath())
                     .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
