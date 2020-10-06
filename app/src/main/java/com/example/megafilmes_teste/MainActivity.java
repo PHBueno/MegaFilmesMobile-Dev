@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -28,6 +30,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class MainActivity extends AppCompatActivity{
+    private Button button;
 
     private RecyclerView moviesList;
     private MoviesAdapter adapter;
@@ -36,6 +39,15 @@ public class MainActivity extends AppCompatActivity{
     private ServiceSerie serieRepository;
 
     private Service movieRepository;
+
+    OnMoviesClickCallback callback = new OnMoviesClickCallback() {
+        @Override
+        public void onClick(Filme filme) {
+            Intent intent = new Intent(MainActivity.this, overview_movie.class);
+            intent.putExtra(overview_movie.MOVIE_ID, filme.getId());
+            startActivity(intent);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,12 +102,4 @@ public class MainActivity extends AppCompatActivity{
         });
     }
     //TODO: Verificar porque o botão não está sendo clicado;
-    OnMoviesClickCallback callback = new OnMoviesClickCallback() {
-        @Override
-        public void onClick(Filme filme) {
-            Intent intent = new Intent(MainActivity.this, overview_movie.class);
-            intent.putExtra(overview_movie.MOVIE_ID, filme.getId());
-            startActivity(intent);
-        }
-    };
 }

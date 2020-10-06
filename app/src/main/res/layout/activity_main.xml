@@ -13,12 +13,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="96dp"
-        android:clickable="true"
+        android:clickable="false"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
-        tools:listitem="@layout/layout_filme"/>
+        tools:listitem="@layout/layout_filme" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_series"

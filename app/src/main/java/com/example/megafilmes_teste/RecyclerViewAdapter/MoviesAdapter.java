@@ -58,7 +58,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.FilmesView
            super(itemView);
            //txtTitle = itemView.findViewById(R.id.filme_name);
            poster = itemView.findViewById(R.id.image_filme);
-           itemView.setOnClickListener(new View.OnClickListener() {
+           poster.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
                    callback.onClick(filme);
