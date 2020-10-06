@@ -14,6 +14,10 @@ public class Serie {
     @Expose
     private String title;
 
+    @SerializedName("name")
+    @Expose
+    private String name;
+
     @SerializedName("poster_path")
     @Expose
     private String posterPath;

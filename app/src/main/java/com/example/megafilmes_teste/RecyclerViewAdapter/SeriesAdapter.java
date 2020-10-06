@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.megafilmes_teste.Interfaces.OnSeriesClickCallback;
 import com.example.megafilmes_teste.R;
 import com.example.megafilmes_teste.model.Serie;
 
@@ -18,8 +19,12 @@ import java.util.List;
 public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder> {
     private List<Serie> series;
     private String GET_POSTERS = "http://image.tmdb.org/t/p/w500";
+    private OnSeriesClickCallback callback;
     
-    public SeriesAdapter(List<Serie> series) {this.series = series;}
+    public SeriesAdapter(List<Serie> series, OnSeriesClickCallback callback) {
+        this.series = series;
+        this.callback = callback;
+    }
 
     @NonNull
     @Override
@@ -41,10 +46,17 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesView
 
     public class SeriesViewHolder extends RecyclerView.ViewHolder{
         ImageView viewSerie;
+        Serie serie;
 
         public SeriesViewHolder(View itemView) {
             super(itemView);
             viewSerie = itemView.findViewById(R.id.image_serie);
+            viewSerie.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callback.onClick(serie);
+                }
+            });
         }
 
 

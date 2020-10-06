@@ -1,8 +1,10 @@
 package com.example.megafilmes_teste.MovieService;
 
+import com.example.megafilmes_teste.Interfaces.OnGetEpCallback;
 import com.example.megafilmes_teste.Interfaces.OnGetSeriesCallback;
 import com.example.megafilmes_teste.Interfaces.TMDbApi;
 import com.example.megafilmes_teste.model.FilmeResponse;
+import com.example.megafilmes_teste.model.Serie;
 import com.example.megafilmes_teste.model.SerieResponse;
 
 import retrofit2.Call;
@@ -52,6 +54,31 @@ public class ServiceSerie {
                     @Override
                     public void onFailure(Call<SerieResponse> call, Throwable t) {
                         callback.onError();
+                    }
+                });
+    }
+
+    public void getEP(int serieId, int temp, final OnGetEpCallback callback) {
+        api_serie.getEP(serieId, temp, URLAPIKEY, "pt-BR")
+                .enqueue(new Callback<Serie>() {
+                    @Override
+                    public void onResponse(Call<Serie> call, Response<Serie> response) {
+                        if (response.isSuccessful()){
+                            Serie ep = response.body();
+                            if (ep != null) {
+                                callback.onSuccess(ep);
+                            } else {
+                                callback.onError();
+                            }
+                        } else {
+                            callback.onError();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Serie> call, Throwable t) {
+                        callback.onError();
+
                     }
                 });
     }

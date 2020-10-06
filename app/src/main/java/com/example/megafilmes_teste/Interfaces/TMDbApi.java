@@ -2,6 +2,7 @@ package com.example.megafilmes_teste.Interfaces;
 
 import com.example.megafilmes_teste.model.Filme;
 import com.example.megafilmes_teste.model.FilmeResponse;
+import com.example.megafilmes_teste.model.Serie;
 import com.example.megafilmes_teste.model.SerieResponse;
 
 import retrofit2.Call;
@@ -29,6 +30,14 @@ public interface TMDbApi {
     Call<Filme> getMovie(
             @Path("movie_id") int id,
             @Query("api_key") String apiKEy,
+            @Query("language") String language
+    );
+
+    @GET("/tv/{tv_id}/season/{season_number}")
+    Call<Serie> getEP(
+            @Path("tv_id") int id,
+            @Path("season_number") int season_number,
+            @Query("api_key") String apiKey,
             @Query("language") String language
     );
 }

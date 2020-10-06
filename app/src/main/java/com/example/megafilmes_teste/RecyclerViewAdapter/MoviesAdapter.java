@@ -66,6 +66,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.FilmesView
            });
        }
 
+
+       /********************
+        * ADICIONA IMAGENS *
+        * NA RECYCLERVIEW  *
+        * DOS FILMES       *
+        ********************/
         public void bind(Filme filme) {
            //txtTitle.setText(filme.getTitle());
             // Insere imagem do poster

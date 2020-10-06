@@ -13,9 +13,11 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.example.megafilmes_teste.Interfaces.OnGetEpCallback;
 import com.example.megafilmes_teste.Interfaces.OnGetMoviesCallback;
 import com.example.megafilmes_teste.Interfaces.OnGetSeriesCallback;
 import com.example.megafilmes_teste.Interfaces.OnMoviesClickCallback;
+import com.example.megafilmes_teste.Interfaces.OnSeriesClickCallback;
 import com.example.megafilmes_teste.MovieService.Service;
 import com.example.megafilmes_teste.MovieService.ServiceSerie;
 import com.example.megafilmes_teste.RecyclerViewAdapter.MoviesAdapter;
@@ -30,7 +32,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class MainActivity extends AppCompatActivity{
-    private Button button;
 
     private RecyclerView moviesList;
     private MoviesAdapter adapter;
@@ -45,6 +46,15 @@ public class MainActivity extends AppCompatActivity{
         public void onClick(Filme filme) {
             Intent intent = new Intent(MainActivity.this, overview_movie.class);
             intent.putExtra(overview_movie.MOVIE_ID, filme.getId());
+            startActivity(intent);
+        }
+    };
+
+    OnSeriesClickCallback callback_serie = new OnSeriesClickCallback() {
+        @Override
+        public void onClick(Serie serie) {
+            Intent intent = new Intent(MainActivity.this, Overview_Series.class);
+            //intent.putExtra(overview_movie.MOVIE_ID, filme.getId());
             startActivity(intent);
         }
     };
@@ -91,7 +101,7 @@ public class MainActivity extends AppCompatActivity{
         serieRepository.getSeries(new OnGetSeriesCallback() {
             @Override
             public void onSuccess(List<Serie> series) {
-                adapterSerie = new SeriesAdapter(series);
+                adapterSerie = new SeriesAdapter(series, callback_serie);
                 seriesList.setAdapter(adapterSerie);
             }
 
@@ -101,5 +111,4 @@ public class MainActivity extends AppCompatActivity{
             }
         });
     }
-    //TODO: Verificar porque o botão não está sendo clicado;
 }
