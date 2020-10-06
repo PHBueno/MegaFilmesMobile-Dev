@@ -6,11 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.megafilmes_teste.Interfaces.OnGetMoviesCallback;
 import com.example.megafilmes_teste.Interfaces.OnGetSeriesCallback;
+import com.example.megafilmes_teste.Interfaces.OnMoviesClickCallback;
 import com.example.megafilmes_teste.MovieService.Service;
 import com.example.megafilmes_teste.MovieService.ServiceSerie;
 import com.example.megafilmes_teste.RecyclerViewAdapter.MoviesAdapter;
@@ -39,6 +42,11 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        /********************************
+        *  SETA ADAPTER PARA FILMES...  *
+         ********************************/
+
         movieRepository = Service.getInstance();
 
         moviesList = findViewById(R.id.recyclerview_filmes);
@@ -48,8 +56,8 @@ public class MainActivity extends AppCompatActivity{
         movieRepository.getMovies(new OnGetMoviesCallback() {
             @Override
             public void onSuccess(List<Filme> movies) {
-                adapter = new MoviesAdapter(movies);
-                moviesList.setAdapter(adapter);
+                    adapter = new MoviesAdapter(movies, callback);
+                    moviesList.setAdapter(adapter);
             }
 
             @Override
@@ -58,7 +66,10 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        //SETA ADAPTER PARA RECYCLERVIEW DE SERIES.
+
+        /********************************
+         * SETA ADAPTER PARA SÉRIES...  *
+         ********************************/
 
         serieRepository = ServiceSerie.getInstance();
 
@@ -77,11 +88,14 @@ public class MainActivity extends AppCompatActivity{
                 Toast.makeText(MainActivity.this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
         });
-        //rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        //List<Serie> series = new ArrayList<>();
-        //adapterSerie = new SeriesAdapter(series);
-        //rv.setAdapter(adapterSerie);
-
     }
-
+    //TODO: Verificar porque o botão não está sendo clicado;
+    OnMoviesClickCallback callback = new OnMoviesClickCallback() {
+        @Override
+        public void onClick(Filme filme) {
+            Intent intent = new Intent(MainActivity.this, overview_movie.class);
+            intent.putExtra(overview_movie.MOVIE_ID, filme.getId());
+            startActivity(intent);
+        }
+    };
 }

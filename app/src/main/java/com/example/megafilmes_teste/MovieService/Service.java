@@ -1,7 +1,10 @@
 package com.example.megafilmes_teste.MovieService;
 
+import com.example.megafilmes_teste.BuildConfig;
+import com.example.megafilmes_teste.Interfaces.OnGetMovieCallback;
 import com.example.megafilmes_teste.Interfaces.OnGetMoviesCallback;
 import com.example.megafilmes_teste.Interfaces.TMDbApi;
+import com.example.megafilmes_teste.model.Filme;
 import com.example.megafilmes_teste.model.FilmeResponse;
 
 import retrofit2.Call;
@@ -59,5 +62,28 @@ public class Service {
                 });
     }
 
+    public void getMovie(int movieId, final OnGetMovieCallback callback) {
+        api.getMovie(movieId, URLAPIKEY , "pt-BR")
+                .enqueue(new Callback<Filme>() {
+                    @Override
+                    public void onResponse(Call<Filme> call, Response<Filme> response) {
+                        if (response.isSuccessful()) {
+                            Filme movie = response.body();
+                            if (movie != null) {
+                                callback.onSuccess(movie);
+                            } else {
+                                callback.onError();
+                            }
+                        } else {
+                            callback.onError();
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(Call<Filme> call, Throwable t) {
+                        callback.onError();
+                    }
+                });
+
+    }
 }

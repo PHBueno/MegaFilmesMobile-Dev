@@ -32,12 +32,11 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesView
     @Override
     public void onBindViewHolder(@NonNull SeriesViewHolder holder, int position) {
         holder.bind(series.get(position));
-
     }
 
     @Override
     public int getItemCount() {
-        return 40;
+        return series.size();
     }
 
     public class SeriesViewHolder extends RecyclerView.ViewHolder{

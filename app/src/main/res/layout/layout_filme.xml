@@ -10,17 +10,15 @@
      <ImageButton
          android:id="@+id/image_filme"
          android:layout_width="wrap_content"
-         android:layout_height="208dp"
-         android:layout_alignParentStart="true"
+         android:layout_height="213dp"
          android:layout_alignParentTop="true"
-         android:layout_marginStart="16dp"
+         android:layout_marginLeft="9dp"
          android:layout_marginTop="13dp"
          android:layout_marginEnd="0dp"
-         android:layout_marginRight="0dp"
+         android:layout_marginStart="16dp"
          android:layout_marginBottom="16dp"
+         android:focusable="false"
          app:srcCompat="@drawable/ic_launcher_foreground"
-         tools:layout_editor_absoluteX="0dp"
-         tools:layout_editor_absoluteY="0dp" />
-
-
+         tools:layout_editor_absoluteX="1dp"
+         tools:layout_editor_absoluteY="1dp" />
 </RelativeLayout>
