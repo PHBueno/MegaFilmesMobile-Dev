@@ -1,19 +1,13 @@
 package com.example.megafilmes_teste;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
-import com.example.megafilmes_teste.Interfaces.OnGetEpCallback;
 import com.example.megafilmes_teste.Interfaces.OnGetMoviesCallback;
 import com.example.megafilmes_teste.Interfaces.OnGetSeriesCallback;
 import com.example.megafilmes_teste.Interfaces.OnMoviesClickCallback;
@@ -25,13 +19,9 @@ import com.example.megafilmes_teste.RecyclerViewAdapter.SeriesAdapter;
 import com.example.megafilmes_teste.model.Filme;
 import com.example.megafilmes_teste.model.Serie;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
-public class MainActivity extends AppCompatActivity{
+public class display_movie extends AppCompatActivity{
 
     private RecyclerView moviesList;
     private MoviesAdapter adapter;
@@ -44,7 +34,7 @@ public class MainActivity extends AppCompatActivity{
     OnMoviesClickCallback callback = new OnMoviesClickCallback() {
         @Override
         public void onClick(Filme filme) {
-            Intent intent = new Intent(MainActivity.this, overview_movie.class);
+            Intent intent = new Intent(display_movie.this, overview_movie.class);
             intent.putExtra(overview_movie.MOVIE_ID, filme.getId());
             startActivity(intent);
         }
@@ -53,7 +43,7 @@ public class MainActivity extends AppCompatActivity{
     OnSeriesClickCallback callback_serie = new OnSeriesClickCallback() {
         @Override
         public void onClick(Serie serie) {
-            Intent intent = new Intent(MainActivity.this, Overview_Series.class);
+            Intent intent = new Intent(display_movie.this, Overview_Series.class);
             //intent.putExtra(overview_movie.MOVIE_ID, filme.getId());
             startActivity(intent);
         }
@@ -84,7 +74,7 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void onError() {
-                Toast.makeText(MainActivity.this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(display_movie.this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -107,7 +97,7 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void onError() {
-                Toast.makeText(MainActivity.this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(display_movie.this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
         });
     }
