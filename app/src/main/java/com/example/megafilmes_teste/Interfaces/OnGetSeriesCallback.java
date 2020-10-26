@@ -1,6 +1,6 @@
 package com.example.megafilmes_teste.Interfaces;
 
-import com.example.megafilmes_teste.model.Serie;
+import com.example.megafilmes_teste.Models.Serie;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package com.example.megafilmes_teste.Interfaces;
 
-import com.example.megafilmes_teste.model.Filme;
-import com.example.megafilmes_teste.model.Serie;
+import com.example.megafilmes_teste.Models.Serie;
 
 public interface OnGetEpCallback {
     void onSuccess(Serie serie);

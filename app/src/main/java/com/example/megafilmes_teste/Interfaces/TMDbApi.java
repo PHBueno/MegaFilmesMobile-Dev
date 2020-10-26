@@ -1,9 +1,9 @@
 package com.example.megafilmes_teste.Interfaces;
 
-import com.example.megafilmes_teste.model.Filme;
-import com.example.megafilmes_teste.model.FilmeResponse;
-import com.example.megafilmes_teste.model.Serie;
-import com.example.megafilmes_teste.model.SerieResponse;
+import com.example.megafilmes_teste.Models.Filme;
+import com.example.megafilmes_teste.Models.FilmeResponse;
+import com.example.megafilmes_teste.Models.Serie;
+import com.example.megafilmes_teste.Models.SerieResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

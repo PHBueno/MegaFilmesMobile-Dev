@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#151515"
-    tools:context=".overview_movie">
+    tools:context=".Views.OverviewMovie">
 
     <ImageView
         android:id="@+id/overview_poster"

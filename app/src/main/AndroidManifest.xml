@@ -12,16 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Login">
+        <activity android:name=".Views.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Overview_Series" />
-        <activity android:name=".overview_movie" />
-        <activity android:name=".display_movie"/>
+        <activity android:name=".Views.OverviewSeries" />
+        <activity android:name=".Views.OverviewMovie" />
+        <activity android:name=".Views.Home"/>
     </application>
 
 </manifest>

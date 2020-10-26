@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Overview_Series"
+    tools:context=".Views.OverviewSeries"
     android:background="#151515">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_ep_series"
