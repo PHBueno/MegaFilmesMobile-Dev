@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.megafilmes_teste.Interfaces.OnMoviesClickCallback;
 import com.example.megafilmes_teste.Interfaces.OnSeriesClickCallback;
@@ -16,6 +18,7 @@ import com.example.megafilmes_teste.Services.SerieServices;
 import com.example.megafilmes_teste.Adapters.SeriesAdapter;
 import com.example.megafilmes_teste.Models.Filme;
 import com.example.megafilmes_teste.Models.Serie;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Home extends AppCompatActivity{
 
@@ -25,10 +28,14 @@ public class Home extends AppCompatActivity{
     private FilmesListPresenter filmesListPresenter;
     private SeriesListPresenter seriesListPresenter;
 
+    Button btnLogout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btnLogout = (Button) findViewById(R.id.buttonLogout);
 
 
         /********************************
@@ -86,5 +93,11 @@ public class Home extends AppCompatActivity{
                 onClickSerie
         );
 
+    }
+
+    public void logout(View v) {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(), Login.class));
+        finish();
     }
 }

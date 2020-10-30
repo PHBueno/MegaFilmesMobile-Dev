@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "990595571024",
+    "firebase_url": "https://megafilmeshd-ff496.firebaseio.com",
+    "project_id": "megafilmeshd-ff496",
+    "storage_bucket": "megafilmeshd-ff496.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:990595571024:android:834a04c5fd3c15dc61e055",
+        "android_client_info": {
+          "package_name": "com.example.megafilmes_teste"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "990595571024-93v5o1ad9j4hr209g3p5j6c73li79pi1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.megafilmes_teste",
+            "certificate_hash": "ad9f266f938b46f3fa4a98a50959c45d22dfc43d"
+          }
+        },
+        {
+          "client_id": "990595571024-78ugnhbgtorn0u27ni4jh2okg0l489js.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBc1-RaS5xy4m4bZ06d8wbSJ1uEVJ2Euxc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "990595571024-78ugnhbgtorn0u27ni4jh2okg0l489js.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
