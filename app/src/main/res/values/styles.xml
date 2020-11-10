@@ -1,9 +1,18 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <!-- Menu Inteiro -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" xmlns:app="http://schemas.android.com/apk/res-auto">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:itemBackground">@color/colorPrimaryDark</item>
+        <item name="color">#FFFFFF</item>
+        <item name="android:colorForeground">#FFFFFF</item>
     </style>
+    <!-- Apenas o Texto -->
+    <style name="title_toolbar" parent="@style/Widget.AppCompat.Toolbar" xmlns:app="http://schemas.android.com/apk/res-auto">
+        <item name="titleTextColor">#FFFFFF</item>
+        <item name="textStartPadding">10dp</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
 </resources>

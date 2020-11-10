@@ -1,13 +1,24 @@
 package com.example.megafilmes_teste.Views;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.icu.text.CaseMap;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.megafilmes_teste.Interfaces.OnMoviesClickCallback;
 import com.example.megafilmes_teste.Interfaces.OnSeriesClickCallback;
@@ -20,7 +31,8 @@ import com.example.megafilmes_teste.Models.Filme;
 import com.example.megafilmes_teste.Models.Serie;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Home extends AppCompatActivity{
+public class Home extends AppCompatActivity {
+
 
     private SeriesAdapter adapterSerie;
     private SerieServices serieRepository;
@@ -28,18 +40,22 @@ public class Home extends AppCompatActivity{
     private FilmesListPresenter filmesListPresenter;
     private SeriesListPresenter seriesListPresenter;
 
-    Button btnLogout;
 
+
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnLogout = (Button) findViewById(R.id.buttonLogout);
-
+        // Criando Title
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Início");
+        // Combinar o Toolbar com o Menu
+        toolbar.inflateMenu(R.menu.main_menu);
 
         /********************************
-        *  SETA ADAPTER PARA FILMES...  *
+         *  SETA ADAPTER PARA FILMES...  *
          ********************************/
 
         filmesListPresenter = new FilmesListPresenter();
@@ -94,10 +110,14 @@ public class Home extends AppCompatActivity{
         );
 
     }
-
-    public void logout(View v) {
+    public void quitApp(MenuItem v)
+    {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(getApplicationContext(), Login.class));
         finish();
     }
+
+
+
+
 }
