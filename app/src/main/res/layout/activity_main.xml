@@ -4,15 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#151515"
+    android:background="@color/colorPrimary"
     tools:context=".Views.Home">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="2dp"
+        android:theme="@style/AppTheme"
+        app:navigationIcon="@drawable/ic_baseline_menu"
+        style="@style/title_toolbar"/>
+
+        <!-- Denominar como butão depois o Drawable -->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_filmes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="128dp"
         android:clickable="false"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -29,36 +41,5 @@
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/layout_serie" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <Button
-        android:id="@+id/buttonLogout"
-        android:layout_width="206dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/recyclerview_series"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="104dp"
-        android:layout_marginLeft="104dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="101dp"
-        android:layout_marginRight="101dp"
-        android:background="#215763"
-        android:onClick="logout"
-        android:text="Logout"
-        android:textColor="#FFF" />
 
 </RelativeLayout>
