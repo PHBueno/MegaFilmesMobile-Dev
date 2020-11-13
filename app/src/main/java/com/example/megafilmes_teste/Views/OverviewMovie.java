@@ -3,6 +3,7 @@ package com.example.megafilmes_teste.Views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +37,13 @@ public class OverviewMovie extends AppCompatActivity {
         movieId = getIntent().getIntExtra(MOVIE_ID, movieId);
         filmeOverviewPresenter = new FilmeOverviewPresenter();
 
+        Intent intent = getIntent();
+        if (intent.ACTION_VIEW.equals(intent.getAction())){
+            Uri uri = intent.getData();
+            String id = uri.getQueryParameter("id");
+            movieId = Integer.parseInt(id);
+        }
+
         filmeOverviewPresenter.getFilmeInfos(movieId, new OnGetMovieCallback() {
             @Override
             public void onSuccess(Filme filme) {
@@ -59,7 +67,7 @@ public class OverviewMovie extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent sendIntent = new Intent();
                         sendIntent.setAction(Intent.ACTION_SEND);
-                        sendIntent.putExtra(Intent.EXTRA_TEXT, ID_FILME);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, "teste.com.br?id="+ID_FILME);
                         sendIntent.setType("text/plain");
 
                         if (sendIntent.resolveActivity(getPackageManager()) != null){
