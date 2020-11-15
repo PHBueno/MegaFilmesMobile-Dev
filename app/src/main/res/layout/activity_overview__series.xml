@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Views.OverviewSeries"
     android:background="#151515">
+    <!--
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_ep_series"
         android:layout_width="wrap_content"
@@ -14,5 +15,35 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/layout_serie_overview_recyclerview"
         />
+     -->
 
+    <TextView
+        android:id="@+id/tvTitleSerie"
+        android:layout_width="163dp"
+        android:layout_height="59dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="321dp"
+        android:layout_marginEnd="123dp"
+        android:layout_marginBottom="351dp"
+        android:text="TITLE"
+        android:textAlignment="center"
+        android:textColor="#F6F2F2" />
+
+    <ImageView
+        android:id="@+id/poster_serie"
+        android:layout_width="385dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="74dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="462dp"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
 </RelativeLayout>

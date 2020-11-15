@@ -33,10 +33,9 @@ public interface TMDbApi {
             @Query("language") String language
     );
 
-    @GET("/tv/{tv_id}/season/{season_number}")
-    Call<Serie> getEP(
+    @GET("tv/{tv_id}")
+    Call<Serie> getSerie(
             @Path("tv_id") int id,
-            @Path("season_number") int season_number,
             @Query("api_key") String apiKey,
             @Query("language") String language
     );

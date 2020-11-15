@@ -1,6 +1,7 @@
 package com.example.megafilmes_teste.Services;
 
 import com.example.megafilmes_teste.Interfaces.OnGetEpCallback;
+import com.example.megafilmes_teste.Interfaces.OnGetSerieCallback;
 import com.example.megafilmes_teste.Interfaces.OnGetSeriesCallback;
 import com.example.megafilmes_teste.Interfaces.TMDbApi;
 import com.example.megafilmes_teste.Models.Serie;
@@ -55,8 +56,31 @@ public class SerieServices {
                     }
                 });
     }
+    public void getSerie(int serieId, final OnGetSerieCallback callback) {
+        api_serie.getSerie(serieId, URLAPIKEY , "pt-BR").enqueue(new Callback<Serie>() {
+            @Override
+            public void onResponse(Call<Serie> call, Response<Serie> response) {
 
-    public void getEP(int serieId, int temp, final OnGetEpCallback callback) {
+                if (response.isSuccessful()) {
+                    Serie serie = response.body();
+                    if (serie != null) {
+                        callback.onSuccess(serie);
+                    } else {
+                        callback.onError();
+                    }
+                } else {
+                    callback.onError();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Serie> call, Throwable t) {
+                callback.onError();
+            }
+        });
+
+
+    /*public void getEP(int serieId, int temp, final OnGetEpCallback callback) {
         api_serie.getEP(serieId, temp, URLAPIKEY, "pt-BR")
                 .enqueue(new Callback<Serie>() {
                     @Override
@@ -78,7 +102,8 @@ public class SerieServices {
                         callback.onError();
 
                     }
-                });
+                });*/
+
     }
 
 }

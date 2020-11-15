@@ -49,8 +49,10 @@ public class OverviewMovie extends AppCompatActivity {
             public void onSuccess(Filme filme) {
                 ImageView movieBackdrop = findViewById(R.id.overview_poster);
                 TextView movieOverview = findViewById(R.id.overview_text);
+                TextView movieTitle = findViewById(R.id.tvTitle);
 
                 movieOverview.setText(filme.getOverview());
+                movieTitle.setText(filme.getTitle());
 
                 final String ID_FILME = String.valueOf(filme.getId());
 
@@ -67,7 +69,7 @@ public class OverviewMovie extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent sendIntent = new Intent();
                         sendIntent.setAction(Intent.ACTION_SEND);
-                        sendIntent.putExtra(Intent.EXTRA_TEXT, "teste.com.br?id="+ID_FILME);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, "uniritterfilmes.com.br/filme?id="+ID_FILME);
                         sendIntent.setType("text/plain");
 
                         if (sendIntent.resolveActivity(getPackageManager()) != null){

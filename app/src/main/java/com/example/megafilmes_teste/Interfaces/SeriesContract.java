@@ -11,5 +11,8 @@ public interface SeriesContract {
                 final OnSeriesClickCallback onClickSerie
         );
     }
+    interface SerieOverviewPresenter {
+        void getSeriesInfos(int serieId, OnGetSerieCallback callback);
+    }
 
 }

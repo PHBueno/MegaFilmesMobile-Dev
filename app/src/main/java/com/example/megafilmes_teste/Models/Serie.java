@@ -10,13 +10,17 @@ public class Serie {
     @Expose
     private int id;
 
-    @SerializedName("title")
+    /*@SerializedName("title")
     @Expose
-    private String title;
+    private String title;*/
 
     @SerializedName("name")
     @Expose
     private String name;
+
+    @SerializedName("backdrop_path")
+    @Expose
+    private String backdrop;
 
     @SerializedName("poster_path")
     @Expose
@@ -43,11 +47,19 @@ public class Serie {
     }
 
     public String getTitle() {
-        return title;
+        return name;
     }
 
-    public void setTitle(String title) {
+    /*public void setTitle(String title) {
         this.title = title;
+    }*/
+
+    public String getBackdrop() {
+        return backdrop;
+    }
+
+    public void setBackdrop(String backdrop) {
+        this.backdrop = backdrop;
     }
 
     public String getPosterPath() {
