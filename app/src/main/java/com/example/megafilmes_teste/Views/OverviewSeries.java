@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OverviewSeries extends AppCompatActivity {
+    private Button btnShareSerie;
     public static String SERIE_ID = "serie_id";
     private static String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w780";
 
@@ -37,10 +42,19 @@ public class OverviewSeries extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview__series);
 
+        btnShareSerie = (Button) findViewById(R.id.btnShareSerie);
+
         int serieId = 0;
         serieId = getIntent().getIntExtra(SERIE_ID, serieId);
 
         serieOverviewPresenter = new SerieOverviewPresenter();
+
+        Intent intent = getIntent();
+        if (intent.ACTION_VIEW.equals(intent.getAction())){
+            Uri uri = intent.getData();
+            String id = uri.getQueryParameter("id");
+            serieId = Integer.parseInt(id);
+        }
 
         System.out.println("Serie ID: " + serieId);
 
@@ -52,8 +66,12 @@ public class OverviewSeries extends AppCompatActivity {
             public void onSuccess(Serie serie){
                 TextView serieTitle = findViewById(R.id.tvTitleSerie);
                 ImageView serieBackdrop = findViewById(R.id.poster_serie);
+                TextView serieOverview = findViewById(R.id.tvOverview);
 
                 serieTitle.setText(serie.getTitle());
+                serieOverview.setText(serie.getOverview());
+
+                final String ID_SERIE = String.valueOf(serie.getId());
 
                 if (!isFinishing()) {
                     Glide.with(OverviewSeries.this)
@@ -61,6 +79,19 @@ public class OverviewSeries extends AppCompatActivity {
                             .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
                             .into(serieBackdrop);
                 }
+                btnShareSerie.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent sendIntent = new Intent();
+                        sendIntent.setAction(Intent.ACTION_SEND);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, "uniritterfilmes.com.br/serie?id="+ID_SERIE);
+                        sendIntent.setType("text/plain");
+
+                        if (sendIntent.resolveActivity(getPackageManager()) != null){
+                            startActivity(sendIntent);
+                        }
+                    }
+                });
             }
             @Override
             public void onError() {

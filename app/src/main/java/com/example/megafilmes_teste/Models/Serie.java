@@ -10,6 +10,10 @@ public class Serie {
     @Expose
     private int id;
 
+    @SerializedName("overview")
+    @Expose
+    private String overview;
+
     /*@SerializedName("title")
     @Expose
     private String title;*/
@@ -73,6 +77,9 @@ public class Serie {
     public String getReleaseDate() {
         return releaseDate;
     }
+
+    public String getOverview() { return overview; }
+    public void setOverview(String overview) {this.overview = overview;}
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
