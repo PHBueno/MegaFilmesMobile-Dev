@@ -1,7 +1,5 @@
 package com.example.megafilmes_teste.Presenters;
 
-import android.widget.Toast;
-
 import com.example.megafilmes_teste.Interfaces.FilmeContract;
 import com.example.megafilmes_teste.Interfaces.OnGetMovieCallback;
 import com.example.megafilmes_teste.Models.Filme;
@@ -14,6 +12,7 @@ public class FilmeOverviewPresenter implements FilmeContract.FilmeOverviewPresen
     private Filme filme;
 
     public FilmeOverviewPresenter() {
+
         filmeAPI = new MovieServices().repository;
     }
 

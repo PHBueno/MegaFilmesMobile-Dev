@@ -19,6 +19,9 @@ import com.example.megafilmes_teste.Presenters.FilmeOverviewPresenter;
 import com.example.megafilmes_teste.Models.Filme;
 import com.example.megafilmes_teste.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class OverviewMovie extends AppCompatActivity {
     private Button btnShare;
     public static String MOVIE_ID = "movie_id";
@@ -44,7 +47,7 @@ public class OverviewMovie extends AppCompatActivity {
             movieId = Integer.parseInt(id);
         }
 
-        filmeOverviewPresenter.getFilmeInfos(movieId, new OnGetMovieCallback() {
+        OnGetMovieCallback onGetFilme = new OnGetMovieCallback() {
             @Override
             public void onSuccess(Filme filme) {
                 ImageView movieBackdrop = findViewById(R.id.overview_poster);
@@ -59,9 +62,9 @@ public class OverviewMovie extends AppCompatActivity {
 
                 if (!isFinishing()) {
                     Glide.with(OverviewMovie.this)
-                        .load(IMAGE_BASE_URL + filme.getBackdrop())
-                        .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
-                        .into(movieBackdrop);
+                            .load(IMAGE_BASE_URL + filme.getBackdrop())
+                            .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
+                            .into(movieBackdrop);
                 }
 
                 btnShare.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +72,7 @@ public class OverviewMovie extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent sendIntent = new Intent();
                         sendIntent.setAction(Intent.ACTION_SEND);
-                        sendIntent.putExtra(Intent.EXTRA_TEXT, "uniritterfilmes.com.br/filme?id="+ID_FILME);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, "uniritterfilmes.edu.br/filme?id="+ID_FILME);
                         sendIntent.setType("text/plain");
 
                         if (sendIntent.resolveActivity(getPackageManager()) != null){
@@ -83,7 +86,10 @@ public class OverviewMovie extends AppCompatActivity {
             public void onError() {
                 Toast.makeText(null, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+
+
+        filmeOverviewPresenter.getFilmeInfos(movieId, onGetFilme);
 
     }
 

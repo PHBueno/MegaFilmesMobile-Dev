@@ -27,7 +27,7 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="uniritterfilmes.com.br" android:path="/serie" android:scheme="http"/>
+                <data android:host="uniritterfilmes.edu.br" android:path="/serie" android:scheme="http"/>
             </intent-filter>
         </activity>
         <activity android:name=".Views.OverviewMovie" >
@@ -35,7 +35,14 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="uniritterfilmes.com.br" android:path="/filme" android:scheme="http"/>
+                <data android:scheme="http" android:host="uniritterfilmes.edu.br" android:path="/filme" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="http" android:host="uniritterfilmes.edu.br" android:path="/filme"/>
             </intent-filter>
         </activity>
         <activity android:name=".Views.Home" />

@@ -2,42 +2,35 @@ package com.example.megafilmes_teste.Presenters;
 
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.megafilmes_teste.Adapters.MoviesAdapter;
-import com.example.megafilmes_teste.Interfaces.FilmeContract;
 import com.example.megafilmes_teste.Interfaces.OnGetMoviesCallback;
+import com.example.megafilmes_teste.Interfaces.OnGetMoviesPresenterCallback;
 import com.example.megafilmes_teste.Interfaces.OnMoviesClickCallback;
 import com.example.megafilmes_teste.Models.Filme;
 import com.example.megafilmes_teste.Services.MovieServices;
 
 import java.util.List;
 
-public class FilmesListPresenter implements FilmeContract.FilmesListPresenter {
+public class FilmesListPresenter {
 
     private static MovieServices filmesAPI;
 
-    private RecyclerView recyclerViewFilmes;
     private MoviesAdapter filmeAdapter;
 
-    public FilmesListPresenter() {
-        filmesAPI = new MovieServices().repository;
-    }
 
-    public RecyclerView useRecyclerView (
-            RecyclerView recyclerView,
-            RecyclerView.LayoutManager layout,
+
+    public FilmesListPresenter (
+            final OnGetMoviesPresenterCallback onGetFilmes,
             final OnMoviesClickCallback onClickFilme
     ) {
-
-        this.recyclerViewFilmes = recyclerView;
-        this.recyclerViewFilmes.setLayoutManager(layout);
+        filmesAPI = new MovieServices().repository;
 
         this.filmesAPI.getMovies(new OnGetMoviesCallback() {
 
             public void onSuccess(List<Filme> filmes) {
                 filmeAdapter = new MoviesAdapter(filmes, onClickFilme);
-                recyclerViewFilmes.setAdapter(filmeAdapter);
+
+                onGetFilmes.onSuccess(filmeAdapter);
             }
 
             public void onError() {
@@ -48,12 +41,6 @@ public class FilmesListPresenter implements FilmeContract.FilmesListPresenter {
             }
 
         });
-
-        return recyclerViewFilmes;
-    }
-
-    public RecyclerView getRecyclerViewFilmes() {
-        return this.recyclerViewFilmes;
     }
 
 }

@@ -2,42 +2,33 @@ package com.example.megafilmes_teste.Presenters;
 
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.megafilmes_teste.Adapters.SeriesAdapter;
 import com.example.megafilmes_teste.Interfaces.OnGetSeriesCallback;
+import com.example.megafilmes_teste.Interfaces.OnGetSeriesPresenterCallback;
 import com.example.megafilmes_teste.Interfaces.OnSeriesClickCallback;
-import com.example.megafilmes_teste.Interfaces.SeriesContract;
 import com.example.megafilmes_teste.Models.Serie;
 import com.example.megafilmes_teste.Services.SerieServices;
 
 import java.util.List;
 
-public class SeriesListPresenter implements SeriesContract.SeriesListPresenter {
+public class SeriesListPresenter {
 
     private static SerieServices seriesAPI;
 
-    private RecyclerView recyclerViewSeries;
     private SeriesAdapter seriesAdapter;
 
-    public SeriesListPresenter() {
-        this.seriesAPI = new SerieServices().repository;
-    }
-
-    public RecyclerView useRecyclerView (
-            RecyclerView recyclerView,
-            RecyclerView.LayoutManager layout,
+    public SeriesListPresenter(
+            final OnGetSeriesPresenterCallback onGetSeries,
             final OnSeriesClickCallback onClickSerie
     ) {
-
-        this.recyclerViewSeries = recyclerView;
-        this.recyclerViewSeries.setLayoutManager(layout);
+        this.seriesAPI = new SerieServices().repository;
 
         this.seriesAPI.getSeries(new OnGetSeriesCallback() {
             @Override
             public void onSuccess(List<Serie> series) {
                 seriesAdapter = new SeriesAdapter(series, onClickSerie);
-                recyclerViewSeries.setAdapter(seriesAdapter);
+                onGetSeries.onSuccess(seriesAdapter);
             }
 
             @Override
@@ -50,11 +41,6 @@ public class SeriesListPresenter implements SeriesContract.SeriesListPresenter {
             }
         });
 
-        return recyclerViewSeries;
-    }
 
-    public RecyclerView getRecyclerViewSeries() {
-        return this.recyclerViewSeries;
     }
-
 }

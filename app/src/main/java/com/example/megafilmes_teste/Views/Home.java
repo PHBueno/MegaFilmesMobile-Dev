@@ -20,6 +20,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.megafilmes_teste.Adapters.MoviesAdapter;
+import com.example.megafilmes_teste.Interfaces.OnGetMoviesPresenterCallback;
+import com.example.megafilmes_teste.Interfaces.OnGetSeriesPresenterCallback;
 import com.example.megafilmes_teste.Interfaces.OnMoviesClickCallback;
 import com.example.megafilmes_teste.Interfaces.OnSeriesClickCallback;
 import com.example.megafilmes_teste.Presenters.FilmesListPresenter;
@@ -58,12 +61,20 @@ public class Home extends AppCompatActivity {
          *  SETA ADAPTER PARA FILMES...  *
          ********************************/
 
-        filmesListPresenter = new FilmesListPresenter();
+        final RecyclerView filmesRecyclerView = findViewById(R.id.recyclerview_filmes);
 
         RecyclerView.LayoutManager layoutFilmes = new LinearLayoutManager(
                 this, LinearLayoutManager.HORIZONTAL,
                 false
         );
+
+        filmesRecyclerView.setLayoutManager(layoutFilmes);
+
+        OnGetMoviesPresenterCallback onGetMoviesPresenter = new OnGetMoviesPresenterCallback() {
+            public void onSuccess(MoviesAdapter filmesAdapter) {
+                filmesRecyclerView.setAdapter(filmesAdapter);
+            }
+        };
 
         OnMoviesClickCallback onClickMovie = new OnMoviesClickCallback() {
             public void onClick(Filme filme) {
@@ -73,27 +84,29 @@ public class Home extends AppCompatActivity {
             }
         };
 
-        RecyclerView filmesRecyclerView = findViewById(R.id.recyclerview_filmes);
+        filmesListPresenter = new FilmesListPresenter(onGetMoviesPresenter, onClickMovie);
 
-        filmesListPresenter.useRecyclerView(
-                filmesRecyclerView,
-                layoutFilmes,
-                onClickMovie
-        );
 
         /********************************
          * SETA ADAPTER PARA SÉRIES...  *
          ********************************/
 
-        seriesListPresenter = new SeriesListPresenter();
+        final RecyclerView seriesRecyclerView = findViewById(R.id.recyclerview_series);
 
         RecyclerView.LayoutManager layoutSeries = new LinearLayoutManager(
                 this, LinearLayoutManager.HORIZONTAL,
                 false
         );
 
+        seriesRecyclerView.setLayoutManager(layoutSeries);
+
+        OnGetSeriesPresenterCallback onGetSeriesPresenter = new OnGetSeriesPresenterCallback() {
+            public void onSuccess(SeriesAdapter seriesAdapter) {
+                seriesRecyclerView.setAdapter(seriesAdapter);
+            }
+        };
+
         OnSeriesClickCallback onClickSerie = new OnSeriesClickCallback() {
-            @Override
             public void onClick(Serie serie) {
                 Intent intent = new Intent(Home.this, OverviewSeries.class);
                 intent.putExtra(OverviewSeries.SERIE_ID, serie.getId());
@@ -101,13 +114,13 @@ public class Home extends AppCompatActivity {
             }
         };
 
-        RecyclerView seriesRecyclerView = findViewById(R.id.recyclerview_series);
 
-        seriesListPresenter.useRecyclerView(
-                seriesRecyclerView,
-                layoutSeries,
+
+        seriesListPresenter = new SeriesListPresenter(
+                onGetSeriesPresenter,
                 onClickSerie
         );
+
 
     }
     public void quitApp(MenuItem v)
