@@ -40,13 +40,6 @@ public class OverviewMovie extends AppCompatActivity {
         movieId = getIntent().getIntExtra(MOVIE_ID, movieId);
         filmeOverviewPresenter = new FilmeOverviewPresenter();
 
-        Intent intent = getIntent();
-        if (intent.ACTION_VIEW.equals(intent.getAction())){
-            Uri uri = intent.getData();
-            String id = uri.getQueryParameter("id");
-            movieId = Integer.parseInt(id);
-        }
-
         OnGetMovieCallback onGetFilme = new OnGetMovieCallback() {
             @Override
             public void onSuccess(Filme filme) {

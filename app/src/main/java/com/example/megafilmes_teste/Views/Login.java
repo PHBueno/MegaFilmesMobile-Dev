@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +34,26 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        int movieId = 0;
+        int serieId = 0;
+        String path = "";
+
+        Intent intent = getIntent();
+        Uri uri = intent.getData();
+
+        if (intent.ACTION_VIEW.equals(intent.getAction())) {
+            String id = uri.getQueryParameter("id");
+            path = uri.getPath().split("/")[1];
+
+            if (path.equals("serie")) {
+                serieId = Integer.parseInt(id);
+            } else {
+                movieId = Integer.parseInt(id);
+            }
+
+        }
+
+
         ProgressBar = findViewById(R.id.progressBar);
         email = findViewById(R.id.editTextLogin);
         password = findViewById(R.id.editTextTextPassword);
@@ -39,6 +61,9 @@ public class Login extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.buttonLogin);
         btnRegister = findViewById(R.id.buttonRegister);
 
+        final int finalMovieId = movieId;
+        final int finalSerieId = serieId;
+        final String finalPath = path;
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,8 +88,24 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(Login.this, "WellCome", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Login.this, "Wellcome", Toast.LENGTH_LONG).show();
+
+                            if (finalPath.equals("filme")) {
+                                Intent intent = new Intent(Login.this, OverviewMovie.class);
+                                intent.putExtra(OverviewMovie.MOVIE_ID, finalMovieId);
+                                startActivity(intent);
+                                return;
+                            }
+
+                            if (finalPath.equals("serie")) {
+                                Intent intent = new Intent(Login.this, OverviewSeries.class);
+                                intent.putExtra(OverviewSeries.SERIE_ID, finalSerieId);
+                                startActivity(intent);
+                                return;
+                            }
+
                             openMainAct();
+
                         } else{
                             Toast.makeText(Login.this, "Error " + task.getException().getMessage(),Toast.LENGTH_LONG).show();
                         }

@@ -49,15 +49,6 @@ public class OverviewSeries extends AppCompatActivity {
 
         serieOverviewPresenter = new SerieOverviewPresenter();
 
-        Intent intent = getIntent();
-        if (intent.ACTION_VIEW.equals(intent.getAction())){
-            Uri uri = intent.getData();
-            String id = uri.getQueryParameter("id");
-            serieId = Integer.parseInt(id);
-        }
-
-        System.out.println("Serie ID: " + serieId);
-
         serieRepository = new SerieServices();
         List<Serie> serie = new ArrayList<>();
 
@@ -84,7 +75,7 @@ public class OverviewSeries extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent sendIntent = new Intent();
                         sendIntent.setAction(Intent.ACTION_SEND);
-                        sendIntent.putExtra(Intent.EXTRA_TEXT, "uniritterfilmes.com.br/serie?id="+ID_SERIE);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, "uniritterfilmes.edu.br/serie?id="+ID_SERIE);
                         sendIntent.setType("text/plain");
 
                         if (sendIntent.resolveActivity(getPackageManager()) != null){

@@ -12,25 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".Views.Register">
+        <activity android:name=".Views.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".Views.Login">
-        </activity>
-        <activity android:name=".Views.OverviewSeries" >
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="uniritterfilmes.edu.br" android:path="/serie" android:scheme="http"/>
-            </intent-filter>
-        </activity>
-        <activity android:name=".Views.OverviewMovie" >
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -39,12 +27,26 @@
             </intent-filter>
 
             <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="uniritterfilmes.edu.br" android:path="/serie" android:scheme="http"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Views.Register"></activity>
+
+        <activity android:name=".Views.OverviewSeries" ></activity>
+
+        <activity android:name=".Views.OverviewMovie" >
+            <intent-filter>
                 <action android:name="android.intent.action.SEND"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:scheme="http" android:host="uniritterfilmes.edu.br" android:path="/filme"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".Views.Home" />
     </application>
 

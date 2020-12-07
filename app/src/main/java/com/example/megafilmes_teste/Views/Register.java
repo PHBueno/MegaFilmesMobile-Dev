@@ -108,11 +108,6 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    /*public void GoMovies(){
-        Intent intent = new Intent(this, Home.class);
-        startActivity(intent);
-    }*/
-
     public void GoLogin(){
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);

@@ -17,8 +17,6 @@ public class FilmesListPresenter {
 
     private MoviesAdapter filmeAdapter;
 
-
-
     public FilmesListPresenter (
             final OnGetMoviesPresenterCallback onGetFilmes,
             final OnMoviesClickCallback onClickFilme
